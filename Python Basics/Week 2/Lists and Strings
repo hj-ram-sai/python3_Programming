@@ -1,1 +1,20 @@
+# Write a program that extracts the last three items in the list sports and assigns it to the variable last. 
+
+sports = ['cricket', 'football', 'volleyball', 'baseball', 'softball', 'track and field', 'curling', 'ping pong', 'hockey']
+a = len(sports)
+last = sports[a-3:a]
+
+# Write code that combines the following variables so that the sentence “You are doing a great job, keep it up!” is assigned to the variable message. 
+# Do not edit the values assigned to by, az, io, or qy.
+
+by = "You are"
+az = "doing a great "
+io = "job"
+qy = "keep it up!"
+bz = len(az)
+cz = az[0:bz-1]
+io2 = io+","
+a = [by, cz, io2, qy]
+
+message = " ".join(a)
 
