@@ -1,0 +1,56 @@
+# Below are a set of scores that students have received in the past semester. Write code to determine how many are 90 or above and assign that result to the value a_scores.
+scores = "67 80 90 78 93 20 79 89 96 97 92 88 79 68 58 90 98 100 79 74 83 88 80 86 85 70 90 100"
+scores_list = list(scores.split(" "))
+print(scores_list)
+
+b_scores = []
+a_scores = 0
+
+for score in scores_list:
+    if int(score) >= 90:
+        a_scores = a_scores + 1
+        b_scores.append(score)
+        
+print(a_scores)
+
+# Write code that uses the string stored in org and creates an acronym which is assigned to the variable acro. Only the first letter of each word should be used, each letter in the acronym should be a capital letter, and there should be nothing to separate the letters of the acronym. Words that should not be included in the acronym are stored in the list stopwords.
+stopwords = ['to', 'a', 'for', 'by', 'an', 'am', 'the', 'so', 'it', 'and', "The"]
+org = "The organization for health, safety, and education"
+
+org_list = list(org.split(" "))
+
+print(org_list)
+new_org = set(org_list) - set(stopwords)
+print(new_org)
+acro = ""
+for word in new_org:
+    acro = acro + word[0].upper()
+print(acro)
+
+
+# A palindrome is a phrase that, if reversed, would read the exact same. Write code that checks if p_phrase is a palindrome by reversing it and then checking if the reversed version is equal to the original.
+p_phrase = "was it a car or a cat I saw"
+
+r_phrase = ""
+
+for i in p_phrase:
+    r_phrase = i + r_phrase
+print(r_phrase)
+
+if(r_phrase == p_phrase):
+    print("The word is a palindrome")
+else:
+    print("The word is not a palindrome")
+
+# Provided is a list of data about a store’s inventory where each item in the list represents the name of an item, how much is in stock, and how much it costs. 
+inventory = ["shoes, 12, 29.99", "shirts, 20, 9.99", "sweatpants, 25, 15.00", "scarves, 13, 7.75"]
+print(type(inventory))
+print(inventory[0])
+for item in inventory:
+    item_list = list(item.split(","))
+    item_name = item_list[0]
+    #print(item_name)
+    item_count = item_list[1]
+    item_price = item_list[2]
+    print("The store has{} {}, each for{} USD.".format(item_count, item_name, item_price))
+
