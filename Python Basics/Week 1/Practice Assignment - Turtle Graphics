@@ -1,0 +1,28 @@
+# Write code to draw a regular pentagon (a five-sided figure with all sides the same length).
+
+import turtle
+
+wn = turtle.Screen()
+
+alex = turtle.Turtle()
+
+distance = 20
+
+for i in range(5):
+    alex.left(72)
+    alex.forward(distance)
+
+# Write a program that uses the turtle module to draw something. 
+# It doesn’t have to be complicated, but draw something different than we have done in the past. 
+
+import turtle
+wn = turtle.Screen()
+wn.bgcolor("red")
+jazz = turtle.Turtle()
+jazz.color("green")
+
+jazz.speed(10)
+for i in range(250):
+    jazz.forward(i)
+    jazz.right(36)
+    jazz.forward(-i/2)
