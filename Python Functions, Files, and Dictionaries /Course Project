@@ -1,0 +1,102 @@
+#We have provided some synthetic (fake, semi-randomly generated) twitter data in a csv file named project_twitter_data.csv which has the text of a tweet, the number of retweets of that tweet, and the number of replies to that tweet. We have also words that express positive sentiment and negative sentiment, in the files positive_words.txt and negative_words.txt.
+#Your task is to build a sentiment classifier, which will detect how positive or negative each tweet is. You will create a csv file, which contains columns for the Number of Retweets, Number of Replies, Positive Score (which is how many happy words are in the tweet), Negative Score (which is how many angry words are in the tweet), and the Net Score for each tweet. At the end, you upload the csv file to Excel or Google Sheets, and produce a graph of the Net Score vs Number of Retweets.
+
+punctuation_chars = ["'", '"', ",", ".", "!", ":", ";", '#', '@']
+
+def strip_punctuation(stri):
+    new_stri = ""
+    for i in stri:
+        if i not in punctuation_chars:
+            new_stri = new_stri + i
+    return new_stri
+
+positive_words = []
+with open("positive_words.txt") as pos_f:
+    #print(pos_f.read())
+    for lin in pos_f:
+        #print(lin)
+        #print(lin[0])
+        if lin[0] != ';' and lin[0] != '\n':
+            positive_words.append(lin.strip())
+print(positive_words)
+
+def get_pos(stri):
+    count = 0
+    z = strip_punctuation(stri.lower())
+    y = z.split()
+    for i in y:
+        if i in positive_words:
+            count += 1
+    return count
+
+negative_words = []
+with open("negative_words.txt") as pos_f:
+    for lin in pos_f:
+        if lin[0] != ';' and lin[0] != '\n':
+            negative_words.append(lin.strip())
+
+def get_neg(stri):
+    count = 0
+    y = strip_punctuation(stri.lower())
+    z = y.split()
+    for i in z:
+        if i in negative_words:
+            count = count + 1
+    return count
+
+with open("project_twitter_data.csv", 'r') as file:
+    y = file.readlines()[1:]
+    #print(y)
+
+final_tweet = []
+
+for i in y:
+    lst = i.split(",")
+    final_tweet.append(lst)
+#print(final_tweet)
+
+lst_text = []
+lst_pos_score = []
+lst_neg_score = []
+lst_net_score = []
+lst_retweets = []
+lst_replies = []
+    
+for l in final_tweet:
+    lst_text.append(l[0])
+    lst_retweets.append(l[-2])
+    lst_replies.append(l[-1])
+print(lst_text)
+print(lst_retweets)
+#print(lst_replies)
+
+lst_replies_clean = []
+
+for i in lst_replies:
+    lst_replies_clean.append(i.strip())
+    #lst_replies_clean.i[0]
+print(lst_replies_clean)
+
+for txt in lst_text:
+    positive_score = get_pos(txt)
+    lst_pos_score.append(positive_score)
+    negative_score = get_neg(txt)
+    lst_neg_score.append(negative_score)
+    net_score = positive_score - negative_score
+    lst_net_score.append(net_score)
+      
+print(lst_pos_score)
+print(lst_neg_score)
+print(lst_net_score)
+    
+outfile = open("resulting_data.csv", 'w')
+outfile.write('Number of Retweets, Number of Replies, Positive Score, Negative Score, Net Score')
+outfile.write('\n')
+
+for i in range(len(lst_text)):
+    row_string = '{},{},{},{},{}'.format(lst_retweets[i],lst_replies_clean[i], lst_pos_score[i], lst_neg_score[i], lst_net_score[i])
+    outfile.write(row_string)
+    outfile.write('\n')
+outfile.close()
+
+    
